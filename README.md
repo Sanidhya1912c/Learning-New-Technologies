@@ -1,2 +1,2 @@
 # Learning-New-Technologies
-in this repo I have written all the code while i was learning a new technology
+In this repo I have written all the code while I was learning a new technology
