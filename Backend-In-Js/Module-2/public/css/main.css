@@ -85,6 +85,8 @@ main {
 .card__actions {
     padding: 1rem;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .card__actions button,
@@ -99,6 +101,8 @@ main {
   background: white;
   border-radius: 3px;
   cursor: pointer;
+  text-decoration: none;
+  padding: 0 2px;
 }
 
 .btn:hover,
