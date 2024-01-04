@@ -13,6 +13,13 @@ exports.getProductsList = (req, res, next) => {
   });
 };
 
+exports.getShop = (req, res, next) => {
+  res.render("shop/", {
+    pageTitle: "Shop",
+    path: "/",
+  });
+};
+
 exports.getCart = (req, res, next) => {
   res.render("shop/cart", {
     pageTitle: "Cart",
@@ -20,9 +27,9 @@ exports.getCart = (req, res, next) => {
   });
 };
 
-exports.getShop = (req, res, next) => {
-  res.render("shop/", {
-    pageTitle: "Shop",
-    path: "/",
+exports.getCheckout = (req, res, next) => {
+  res.render("shop/checkout", {
+    pageTitle: "Checkout",
+    path: "/checkout",
   });
 };

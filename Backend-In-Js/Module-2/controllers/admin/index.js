@@ -1,19 +1,5 @@
 const Product = require("../../models/product");
 
-exports.getProducts = (req, res, next) => {
-  res.render("admin/products", {
-    pageTitle: "Products",
-    path: "/admin/products",
-  });
-};
-
-exports.getEditProducts = (req, res, next) => {
-  res.render("admin/edit-products", {
-    pageTitle: "Edit-Products",
-    path: "/admin/edit-product",
-  });
-};
-
 exports.getAddProduct = (req, res, next) => {
   res.render("admin/add-product", {
     pageTitle: "Add Product",
@@ -25,7 +11,23 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  const product = new Product(req.body.title);
+  const { title, price, description } = req.body;
+
+  const product = new Product(title, price, description);
   product.save();
   res.redirect("/");
+};
+
+exports.getProducts = (req, res, next) => {
+  res.render("admin/products", {
+    pageTitle: "Products",
+    path: "/admin/products",
+  });
+};
+
+exports.getEditProducts = (req, res, next) => {
+  res.render("admin/edit-product", {
+    pageTitle: "Edit-Products",
+    path: "/admin/edit-product",
+  });
 };
