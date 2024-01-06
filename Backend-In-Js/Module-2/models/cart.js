@@ -19,7 +19,7 @@ module.exports = class Cart {
         ],
         totalPrice: 0,
 
-        //puted some real data to understand this code leter 
+        //puted some real data to understand this code leter
       };
 
       if (!err) cart = JSON.parse(fileContent);
@@ -32,13 +32,15 @@ module.exports = class Cart {
       let updatedProduct;
 
       if (existingProduct) {
+        // if product exist
         updatedProduct = { ...existingProduct };
         updatedProduct.quantity = updatedProduct.quantity + 1;
         cart.products = [...cart.products];
-        //use to update the values of cart products
+        // use to update the values of cart products
 
         cart.products[existingProductIndex] = updatedProduct;
       } else {
+        // if product does not exist
         updatedProduct = { id: id, quantity: 1 };
         cart.products = [...cart.products, updatedProduct];
       }
