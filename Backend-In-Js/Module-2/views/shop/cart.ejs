@@ -1,7 +1,25 @@
 <%- include('../includes/head.ejs') %>
-    </head>
+<link rel="stylesheet" href="/css/product.css">
+</head>
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-        <h1>Cart</h1>
-        <%- include('../includes/end.ejs') %>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <% for (let prods of products) { %>
+  <main class="centered">
+    <div class="centered-div">
+      <h1><%= prods.title %></h1>
+      <div>
+        <img src="<%= prods.imageUrl %>" alt="<%= prods.title %>">
+      </div>
+      <h2><%= prods.price %></h2>
+      <p><%= prods.description %></p>
+      <p><%= prods.quantity%></p>
+      <form action="/cart" method="post">
+        <button type="submit" class="btn">Add to cart</button>
+        <input type="hidden" name="productId" value="<%= prods.id%>">
+      </form>
+    </div>
+  </main>
+  <% } %>
+
+  <%- include('../includes/end.ejs') %>

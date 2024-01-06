@@ -31,7 +31,7 @@
             <button type="submit" class="btn">Edit</button>
             <input type="hidden" name="productId" value="<%= product.id%>">
           </form>
-          <form action="/admin/edit-product" method="POST">
+          <form action="/admin/delete-product/<%= product.id %>" method="POST">
             <button class="btn" type="submit">Delete</button>
             <input type="hidden" name="productId" value="<%= product.id%>">
           </form>
