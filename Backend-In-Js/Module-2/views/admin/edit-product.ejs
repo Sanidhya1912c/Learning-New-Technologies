@@ -18,13 +18,14 @@
       </div>
       <div class="form-control">
         <label for="price">Price</label>
-        <input name="price" id="price" step="0.01" value='<% if (editing) {%><%= product.price %> <% }  %>'/>
+        <input name="price" id="price" step="0.01" value='<% if (editing) {%><%= product.price %> <% }  %>' />
       </div>
       <div class="form-control">
         <label for="description">Description</label>
         <textarea name="description" id="description" rows="5"> <% if (editing) {%><%= product.description%> <% }  %></textarea>
       </div>
       <% if (editing === 'true') { %>
+      <input type="hidden" name="productId" value="<%= product.id%>">
       <button class="btn" type="submit">Edit Product</button>
       <% } else {%>
       <button class="btn" type="submit">Add Product</button>
