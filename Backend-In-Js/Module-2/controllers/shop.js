@@ -34,11 +34,10 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   Cart.getCart((cart) => {
-    console.log(cart);
     Product.fetchAll((prods) => {
       const cartPorducts = [];
       for (product of prods) {
-        const cartPorductData = cart.product.find(
+        const cartPorductData = cart.products.find(
           (prod) => prod.id === product.id
         );
         if (cartPorductData) {
@@ -48,6 +47,7 @@ exports.getCart = (req, res, next) => {
           });
         }
       }
+      console.log(cartPorducts);
       res.render("shop/cart", {
         products: cartPorducts,
         path: "/cart",
@@ -63,6 +63,13 @@ exports.postCart = (req, res, next) => {
     Cart.addProduct(productId, Number(product.price));
   });
   res.redirect("/cart");
+};
+
+exports.postCartDeleteItem = (req, res, next) => {
+  const productId = req.body.productId;
+  const productPrice = req.body.productPrice;
+  Cart.deleteById(productId, productPrice);
+  res.redirect('/cart')
 };
 
 exports.getOrders = (req, res, next) => {
