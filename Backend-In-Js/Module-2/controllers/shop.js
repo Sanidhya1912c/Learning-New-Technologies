@@ -34,11 +34,18 @@ exports.getIndex = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   Cart.getCart((cart) => {
+    console.log(cart);
     Product.fetchAll((prods) => {
       const cartPorducts = [];
       for (product of prods) {
-        if (cart.product.find((prod) => prod.id === product.id)) {
-          cartPorducts.push(product);
+        const cartPorductData = cart.product.find(
+          (prod) => prod.id === product.id
+        );
+        if (cartPorductData) {
+          cartPorducts.push({
+            productData: product,
+            quantity: cartPorductData.quantity,
+          });
         }
       }
       res.render("shop/cart", {

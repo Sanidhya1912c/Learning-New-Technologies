@@ -52,7 +52,7 @@ module.exports = class Cart {
   static getCart(cb) {
     fs.readFile(path, (err, fileContent) => {
       if(err) numm
-      const cart = JSON.stringify(fileContent)
+      const cart = JSON.parse(fileContent)
       return cb(cart)
     });
   }
