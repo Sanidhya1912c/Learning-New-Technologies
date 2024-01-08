@@ -51,9 +51,9 @@ module.exports = class Cart {
 
   static getCart(cb) {
     fs.readFile(path, (err, fileContent) => {
-      if(err) numm
-      const cart = JSON.parse(fileContent)
-      return cb(cart)
+      if (err) numm;
+      const cart = JSON.parse(fileContent);
+      return cb(cart);
     });
   }
 
@@ -62,18 +62,34 @@ module.exports = class Cart {
       if (err) return;
       const cart = JSON.parse(fileContent);
       const updaterCart = { ...cart };
-      const products = updaterCart.products.find((prods) => prods.id === id);
-      const productQuantify = products.quantity;
+      const product = updaterCart.products.find((prods) => prods.id === id);
 
-      updaterCart.products = updaterCart.products.filter(
-        (prods) => prods.id !== id
-      );
-      updaterCart.totalPrice =
-        updaterCart.totalPrice - productPrice * productQuantify;
+      if (!product) return;
+      
+      if (product.quantity > 1) {
+        product.quantity = product.quantity - 1;
 
-      fs.writeFile(path, JSON.stringify(updaterCart), (err) =>
-        console.log(err)
-      );
+        updaterCart.products = updaterCart.products.filter(
+          (prods) => prods.id !== id
+        );
+
+        updaterCart.products.push(product);
+
+        updaterCart.totalPrice = updaterCart.totalPrice - productPrice;
+
+        fs.writeFile(path, JSON.stringify(updaterCart), (err) =>
+          console.log(err)
+        );
+      } else {
+        updaterCart.products = updaterCart.products.filter(
+          (prods) => prods.id !== id
+        );
+        updaterCart.totalPrice = updaterCart.totalPrice - productPrice;
+
+        fs.writeFile(path, JSON.stringify(updaterCart), (err) =>
+          console.log(err)
+        );
+      }
     });
   }
 };
