@@ -47,8 +47,10 @@ exports.getEditProductId = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
   const { title, imageUrl, price, description } = req.body;
   const product = new Product(null, title, +price, description, imageUrl);
-  product.save();
-  res.redirect("/");
+  product
+    .save()
+    .then(() => res.redirect("/admin/products"))
+    .catch((err) => console.log(err));
 };
 
 exports.getProducts = (req, res, next) => {
