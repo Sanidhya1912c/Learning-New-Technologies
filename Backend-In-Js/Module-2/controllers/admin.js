@@ -1,6 +1,6 @@
 const Product = require("../models/product");
 
-exports.getEditProduct = (req, res, next) => {
+exports.getEditProduct = (req, res, next) => { //
   res.render("admin/edit-product", {
     product: "",
     pageTitle: "Edit Product",
@@ -41,7 +41,7 @@ exports.getEditProductId = (req, res, next) => {
   });
 };
 
-exports.postAddProduct = (req, res, next) => {
+exports.postAddProduct = (req, res, next) => { //
   const { title, imageUrl, price, description } = req.body;
   const defaultPicture =
     "https://images.unsplash.com/photo-1591171291116-6310ea27c3f0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -50,6 +50,7 @@ exports.postAddProduct = (req, res, next) => {
   Product.create({ title, price, description, imageUrl: finalImgUrl })
     .then((result) => console.log(result))
     .catch((err) => console.log(err));
+  res.redirect('/')
 };
 
 exports.getProducts = (req, res, next) => {
