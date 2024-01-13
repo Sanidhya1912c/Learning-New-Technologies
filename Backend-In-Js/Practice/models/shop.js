@@ -3,5 +3,6 @@ module.exports = class Product {
     this.titel = titel
     this.price = price
     this.description = description
+    this.imageUrl = imageUrl
   }
 };
