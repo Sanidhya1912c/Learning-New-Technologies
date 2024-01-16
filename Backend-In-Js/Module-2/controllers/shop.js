@@ -5,6 +5,7 @@ exports.getProducts = (req, res, next) => {
   //
   Product.findAll()
     .then((products) => {
+      console.log(products)
       res.render("shop/product-list", {
         prods: products,
         pageTitle: "All Products",
