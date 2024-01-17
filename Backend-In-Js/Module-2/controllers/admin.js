@@ -1,5 +1,6 @@
 const e = require("express");
 const Product = require("../models/product");
+const App = require("../app");
 
 exports.getEditProduct = (req, res, next) => {
   //
@@ -61,12 +62,9 @@ exports.getEditProductId = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  //
   const { title, imageUrl, price, description } = req.body;
   const defaultPicture =
     "https://images.unsplash.com/photo-1591171291116-6310ea27c3f0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-
-  console.log(req?.user?.id, req.user);
 
   const finalImgUrl = imageUrl || defaultPicture;
   Product.create({
@@ -74,9 +72,7 @@ exports.postAddProduct = (req, res, next) => {
     price,
     description,
     imageUrl: finalImgUrl,
-  })
-    // .then((result) => console.log(result))
-    .catch((err) => console.log(err));
+  }).catch((err) => console.log(err));
   res.redirect("/");
 };
 
