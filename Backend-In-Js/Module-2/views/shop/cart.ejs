@@ -1,0 +1,24 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <main class="centered">
+    <% for (let prods of products) { %>
+    <div class="centered-div">
+      <h1>Title: <%= prods.productData.title %></h1>
+      <h2>Price: <%= prods.productData.price %></h2>
+      <p>Description: <%= prods.productData.description %></p>
+      <p>Quantity: <%= prods.quantity%></p>
+      <form action="/cart-delete-item" method="post">
+        <button type="submit" class="btn">Delete</button>
+        <input type="hidden" name="productId" value="<%= prods.productData.id%>">
+        <input type="hidden" name="productPrice" value="<%= prods.productData.price%>">
+      </form>
+    </div>
+
+    <% } %>
+  </main>
+
+  <%- include('../includes/end.ejs') %>
