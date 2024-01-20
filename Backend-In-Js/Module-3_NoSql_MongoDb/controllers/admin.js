@@ -18,11 +18,14 @@ exports.postAddProduct = (req, res, next) => {
     baseImageUrl ||
     "https://images.unsplash.com/photo-1591171291116-6310ea27c3f0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
+  const finalDescription = description || "Nice Book";
+
   const product = new Product({
     title: title,
-    description: description,
+    description: finalDescription,
     price: price,
     imageUrl: imageUrl,
+    userId: req.user._id,
   });
 
   product
@@ -43,9 +46,8 @@ exports.getEditProduct = (req, res, next) => {
     return res.redirect("/");
   }
   const prodId = req.params.productId;
-  Product.findById(prodId)
-    // Product.findById(prodId)
-    .then((product) => {
+  Product.find({ _id: prodId })
+    .then(([product]) => {
       if (!product) {
         return res.redirect("/");
       }
@@ -60,22 +62,20 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res, next) => {
-  const prodId = req.body.productId;
-  const updatedTitle = req.body.title;
-  const updatedPrice = req.body.price;
-  const updatedImageUrl = req.body.imageUrl;
-  const updatedDesc = req.body.description;
+  const { productId, title, price, imageUrl, description } = req.body;
 
-  const product = new Product(
-    updatedTitle,
-    updatedPrice,
-    updatedDesc,
-    updatedImageUrl,
-    prodId
-  );
-  product
-    .save()
-    .then((result) => {
+  Product.updateOne(
+    { _id: productId },
+    {
+      $set: {
+        title: title,
+        price: price,
+        imageUrl: imageUrl,
+        description: description,
+      },
+    }
+  )
+    .then(() => {
       console.log("UPDATED PRODUCT!");
       res.redirect("/admin/products");
     })
@@ -83,8 +83,11 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
+    // .select("name price -_id") // - for discard ths fied
+    // .populate("userId", "name ") // we only get name form userId, use to get certain information from perticulr user
     .then((products) => {
+      console.log(products);
       res.render("admin/products", {
         prods: products,
         pageTitle: "Admin Products",
@@ -96,7 +99,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteById(prodId)
+  Product.deleteOne({ _id: prodId })
     .then(() => {
       console.log("DESTROYED PRODUCT");
       res.redirect("/admin/products");
