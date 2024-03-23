@@ -1,0 +1,86 @@
+/*App Section*/
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.App-Section{
+    display: flex;
+    flex-direction: column;
+    background: #604b8d;
+    align-items: center;
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* Form Section */
+.form-container{
+    margin-top: 2rem;
+    background: rgb(137 102 171);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    min-height: 100px;
+}
+.lable{
+    margin-right: 10px;
+}
+.input{
+    background: #c99fe7;
+    border-radius: 4px;
+    border: aliceblue;
+}
+.button{
+    background: #d0a3fb;
+    border: 0px;
+    border-radius: 4px 8px;
+    padding: 6px 8px;
+}
+
+/* PopUp Section */
+
+.popup-container{
+    background: #c3a2cd;
+    width: 400px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    gap: 10px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.button{
+    background: #d0a3fb;
+    border: 0px;
+    border-radius: 4px ;
+    padding: 6px 8px;
+}
+
+/* List */
+.listItem-container{
+    background: #a97ebd;
+    padding: 6px;
+    margin-top: 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    width: 260px;
+}
+.listDivs{
+    background: #ab8af3;
+    padding: 0px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+.listDivs > label{
+    margin-right: 4px;
+}
